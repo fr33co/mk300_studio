@@ -38,6 +38,17 @@ Solo se ha probado con el firmware **v75**.
 - La MK300 conectada por USB. Tu usuario debe poder abrir `/dev/snd/midiC*D*` (grupo `audio`); en Ubuntu suele
   bastar con tener la sesión iniciada. Hay una regla udev opcional en `tools/99-mk300.rules`.
 
+## Instalación (paquete .deb)
+
+```
+sh packaging/build_deb.sh            # genera dist/mk300-studio_0.1.0_all.deb
+sudo apt install ./dist/mk300-studio_0.1.0_all.deb
+mk300-studio                         # o desde el menú de aplicaciones
+```
+
+Instala la app en `/usr/lib/mk300-studio` y depende de `python3-pyqt5` y `alsa-utils`. Los respaldos se guardan en
+`~/.local/share/mk300-studio/backups/`. Para quitarla: `sudo apt remove mk300-studio`.
+
 ## Uso
 
 ```
@@ -45,7 +56,7 @@ cd mk300-linux
 python3 run.py
 ```
 
-Al abrir, si la pedalera está conectada se lee su banco y se guarda una copia en `mk300-linux/backups/`.
+Al abrir, si la pedalera está conectada se lee su banco y se guarda una copia en `~/.local/share/mk300-studio/backups/`.
 Cierra otras aplicaciones que usen la pedalera (como un editor MIDI): el puerto es exclusivo.
 
 Para pruebas sin tocar la pedalera: `MK300_NO_PEDAL=1 python3 run.py`.
@@ -82,7 +93,7 @@ HANDOFF.md     estado del proyecto y pendientes
 
 - La app escribe solo en el preset activo (RAM), en posiciones de preset que tú confirmas y en los ajustes
   globales. No borra sectores ni toca firmware.
-- Antes de guardar presets importantes, conserva un respaldo (`mk300-linux/backups/` se genera solo al conectar).
+- Antes de guardar presets importantes, conserva un respaldo (`~/.local/share/mk300-studio/backups/` se genera solo al conectar).
 - Usa solo software que hayas obtenido de forma legítima.
 
 ## Licencia

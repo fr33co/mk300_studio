@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=MK300 Studio
+Comment=Configurador de la pedalera MK300 por USB
+Exec=mk300-studio
+Icon=mk300-studio
+Terminal=false
+Categories=AudioVideo;Audio;Midi;
+Keywords=MIDI;pedalera;guitarra;MK300;
+StartupWMClass=mk300-studio

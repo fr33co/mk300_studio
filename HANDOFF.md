@@ -7,7 +7,7 @@ Este archivo sirve para retomar el trabajo en otra sesión: qué hay, cómo se p
 - **Pruebas de escritura solo en presets vacíos "USER PRESET n".** Nunca con `CLEAN NFDA` ni `DISTORSION NFDA`
   (ni seleccionarlos con código: una vez una app de pruebas se conectó sola y los seleccionó; por eso existe
   `MK300_NO_PEDAL=1`. Hoy la app ya no conecta sola: hay que pulsar la tarjeta del dispositivo).
-- Antes de escribir en flash, respaldo del banco. La app guarda uno en `mk300-linux/backups/` al conectar.
+- Antes de escribir en flash, respaldo del banco. La app guarda uno en `~/.local/share/mk300-studio/backups/` al conectar.
 - **Nada de referencias al fabricante, a su app ni a su socio de servicios** en lo que se sube a GitHub (nombres, logos, rutas,
   código o recursos). Los nombres de modelo (ampli/pantalla/distorsión) se leen de la propia pedalera.
 - Repositorio **privado**: `git@github.com:fr33co/mk300_studio.git` (rama `main`). Licencia GPL-3.0 o posterior.
@@ -64,7 +64,7 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 7. Fidelidad: rangos estimados (Pan, BPM, Auto Gate, LC/HC del CAB, EQ); Bass EQ 7 y Whammy sin nombre; barra de título.
 8. Antes de hacer público el repo: decidir qué hacer con `factory_am3.bin`, `factory_am4.bin` y `catalog.json` (datos
    del fabricante), el autor del commit (nombre y correo reales) y sacar `.git` de Syncthing (`.stignore`).
-9. Opcional: reconexión automática sin pulsar la tarjeta; podar `mk300-linux/backups/`.
+9. Opcional: reconexión automática sin pulsar la tarjeta; podar `~/.local/share/mk300-studio/backups/`.
 
 ## Notas
 - La carpeta vive en Syncthing; `.git` también se sincroniza (riesgo de conflictos).

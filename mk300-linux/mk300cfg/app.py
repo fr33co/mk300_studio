@@ -43,6 +43,12 @@ def color_icon(patch):
 TAB_NAMES = ["Effect", "Glob", "EQ", "Looper", "Drum"]
 
 
+def user_data_dir():
+    """Carpeta de datos del usuario (escribible aunque la app esté instalada en /usr)."""
+    base = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
+    return os.path.join(base, "mk300-studio")
+
+
 def load_json(name):
     with open(os.path.join(DATA_DIR, name), encoding="utf-8") as f:
         return json.load(f)
@@ -645,8 +651,8 @@ class MainWindow(QtWidgets.QMainWindow):
             else:
                 QtWidgets.QMessageBox.critical(self, "Pedalera", str(e))
             return False
-        # Copia automática de lo leído: backups/mk300_<fecha>.bin junto a la app.
-        folder = os.path.join(os.path.dirname(DATA_DIR), "backups")
+        # Copia automática de lo leído: <datos de usuario>/mk300-studio/backups/mk300_<fecha>.bin
+        folder = os.path.join(user_data_dir(), "backups")
         os.makedirs(folder, exist_ok=True)
         path = os.path.join(folder, time.strftime("mk300_%Y%m%d_%H%M%S.bin"))
         with open(path, "wb") as f:
@@ -1150,6 +1156,7 @@ class MainWindow(QtWidgets.QMainWindow):
 def main():
     app = QtWidgets.QApplication(sys.argv)
     app.setApplicationName("MK300 Studio")
+    app.setDesktopFileName("mk300-studio")
     app.setWindowIcon(QtGui.QIcon(os.path.join(os.path.dirname(DATA_DIR), "assets", "app_icon.svg")))
     w = MainWindow()
     w.showMaximized()  # ocupa todo el monitor; el contenido se amplía con la ventana

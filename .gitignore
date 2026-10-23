@@ -34,3 +34,6 @@ tools/midi_spy_attach.py
 tools/midi_spy_drv.js
 tools/window_shots.ps1
 analysis/blutter_frida.js
+
+# Paquetes generados
+dist/
