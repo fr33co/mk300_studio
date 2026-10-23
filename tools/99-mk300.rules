@@ -1,0 +1,2 @@
+# Acceso sin root a la MK300 (Jieli 3654:7756) para el configurador
+SUBSYSTEM=="usb", ATTR{idVendor}=="3654", ATTR{idProduct}=="7756", MODE="0660", TAG+="uaccess", GROUP="plugdev"

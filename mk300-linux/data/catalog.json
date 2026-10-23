@@ -1,0 +1,2575 @@
+{
+ "WAH": [
+  {
+   "name": "X-Wah",
+   "params": [
+    {
+     "name": "Value"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Funk-Wah",
+   "params": [
+    {
+     "name": "Value"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Slide-Wah",
+   "params": [
+    {
+     "name": "Value"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Cry-Wah",
+   "params": [
+    {
+     "name": "Value"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Wah-Wah",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Q"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Width"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Sense-Wah",
+   "params": [
+    {
+     "name": "Sense"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Q"
+    },
+    {
+     "name": "fPeak"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Width"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  }
+ ],
+ "FX": [
+  {
+   "name": "Wah-Wah",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Q"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Width"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Lofi",
+   "params": [
+    {
+     "name": "Bit",
+     "maxVal": 48,
+     "minVal": 4
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "filter"
+    }
+   ]
+  },
+  {
+   "name": "Sense-Wah",
+   "params": [
+    {
+     "name": "Sense"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Q"
+    },
+    {
+     "name": "fPeak"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Width"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Boost",
+   "params": [
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "A Boost",
+   "params": [
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Bass"
+    },
+    {
+     "name": "Mid"
+    },
+    {
+     "name": "Treble"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "E Boost",
+   "params": [
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Bass"
+    },
+    {
+     "name": "Mid"
+    },
+    {
+     "name": "Treble"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "B Boost",
+   "params": [
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Bass"
+    },
+    {
+     "name": "Mid"
+    },
+    {
+     "name": "Treble"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Boost ED",
+   "params": [
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Grit"
+    },
+    {
+     "name": "Level"
+    }
+   ]
+  },
+  {
+   "name": "Compress",
+   "params": [
+    {
+     "name": "Sustain"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "Compress Pro",
+   "params": [
+    {
+     "name": "Ratio"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Knee"
+    },
+    {
+     "name": "Thd"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "F Compress",
+   "params": [
+    {
+     "name": "Ratio"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Knee"
+    },
+    {
+     "name": "Thd"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "Pitch",
+   "params": [
+    {
+     "name": "High\\nPitch",
+     "maxVal": 48,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Low\\nPitch",
+     "minVal": -48,
+     "maxVal_expr": "<rzr>"
+    },
+    {
+     "name": "High\\nLevel"
+    },
+    {
+     "name": "Low\\nLevel"
+    },
+    {
+     "name": "Dry\\nLevel"
+    }
+   ]
+  },
+  {
+   "name": "Octave",
+   "params": [
+    {
+     "name": "High\\nLevel"
+    },
+    {
+     "name": "Low\\nLevel"
+    },
+    {
+     "name": "Dry\\nLevel"
+    }
+   ]
+  },
+  {
+   "name": "Ring",
+   "params": [
+    {
+     "name": "Freq"
+    },
+    {
+     "name": "Mix"
+    }
+   ]
+  },
+  {
+   "name": "Pitch shifter",
+   "params": [
+    {
+     "name": "Semi",
+     "maxVal": 24,
+     "minVal": -24
+    }
+   ]
+  },
+  {
+   "name": "Whammy",
+   "params": []
+  }
+ ],
+ "GATE": [
+  {
+   "name": "AI Gate",
+   "params": [
+    {
+     "name": "Gate"
+    },
+    {
+     "name": "Bias"
+    }
+   ]
+  },
+  {
+   "name": "Soft Gate",
+   "params": [
+    {
+     "name": "Thd",
+     "maxVal": -60,
+     "minVal": -160
+    }
+   ]
+  },
+  {
+   "name": "Hard Gate",
+   "params": [
+    {
+     "name": "Thd",
+     "maxVal": -60,
+     "minVal": -160
+    }
+   ]
+  },
+  {
+   "name": "Pro Gate",
+   "params": [
+    {
+     "name": "Att"
+    },
+    {
+     "name": "Rel"
+    },
+    {
+     "name": "Thd",
+     "maxVal": -60,
+     "minVal": -160
+    },
+    {
+     "name": "Kw"
+    },
+    {
+     "name": "Ratio"
+    }
+   ]
+  },
+  {
+   "name": "Compress",
+   "params": [
+    {
+     "name": "Sustain"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "Compress Pro",
+   "params": [
+    {
+     "name": "Ratio"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Knee"
+    },
+    {
+     "name": "Thd"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "F Compress",
+   "params": [
+    {
+     "name": "Ratio"
+    },
+    {
+     "name": "Gain"
+    },
+    {
+     "name": "Knee"
+    },
+    {
+     "name": "Thd"
+    },
+    {
+     "name": "Attack"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Blend"
+    }
+   ]
+  },
+  {
+   "name": "AI Ms Gate",
+   "params": [
+    {
+     "name": "Gate"
+    },
+    {
+     "name": "Bias"
+    }
+   ]
+  }
+ ],
+ "EQ": [
+  {
+   "name": "Guitar EQ 6",
+   "params": [
+    {
+     "name": "100Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "200Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "400Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "800Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "1.6kHz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "3.2kHz",
+     "minVal": -24,
+     "maxVal": 24
+    }
+   ]
+  },
+  {
+   "name": "Bass EQ 7",
+   "params": [
+    {
+     "name": null
+    },
+    {
+     "name": null
+    },
+    {
+     "name": null
+    },
+    {
+     "name": null
+    },
+    {
+     "name": null
+    },
+    {
+     "name": null
+    },
+    {
+     "name": null
+    }
+   ]
+  },
+  {
+   "name": "Normal EQ 10",
+   "params": [
+    {
+     "name": "31.25Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "62.5Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "125Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "250Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "500Hz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "1kHz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "2kHz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "4kHz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "8kHz",
+     "minVal": -24,
+     "maxVal": 24
+    },
+    {
+     "name": "16kHz",
+     "minVal": -24,
+     "maxVal": 24
+    }
+   ]
+  }
+ ],
+ "MOD": [
+  {
+   "name": "Chorus",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tri Chorus",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Flanger",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tri Flanger",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tremolo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tri Tremolo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Opto Tremolo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Phaser",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "MidCut"
+    },
+    {
+     "name": "Reso"
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Vibrato",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tri Vibrato",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Opto Vibrato",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Univibe",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tri Univibe",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Autofilter",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Min"
+    },
+    {
+     "name": "Max"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Phaser Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Stage",
+     "getValueText": 10,
+     "maxVal_expr": null,
+     "paramWidgetType_expr": null
+    },
+    {
+     "name": "Regen"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Lfo",
+     "getValueText": 10,
+     "maxVal": 8
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Flanger Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Regen"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Jet"
+    },
+    {
+     "name": "Lfo",
+     "getValueText": 10,
+     "maxVal": 8
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Vibe Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Stage",
+     "getValueText": 10,
+     "maxVal_expr": null,
+     "paramWidgetType_expr": null
+    },
+    {
+     "name": "Regen"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Lfo",
+     "getValueText": 10,
+     "maxVal": 8
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Chorus Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Mode",
+     "getValueText": 16,
+     "maxVal": 10
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tremolo Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Level"
+    },
+    {
+     "name": "Mode",
+     "getValueText": 16,
+     "maxVal": 4
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Vibrato Stereo",
+   "params": [
+    {
+     "name": "Speed",
+     "minVal": 2
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Bits",
+     "getValueText": 16,
+     "maxVal": 40
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  }
+ ],
+ "DLY": [
+  {
+   "name": "Clean",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Modern",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Phaser"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Echo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Analog",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Duck",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Release"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Dtype",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Grit"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tremolo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pattern",
+     "maxVal": 36,
+     "getValueText_expr": "<r0>"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Filter",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Filter"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Dual",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Filter"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    },
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "T-Mode",
+     "maxVal": 32,
+     "getValueText_expr": "<r0>"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Lofi",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Grit"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Pattern",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pattern",
+     "maxVal": 30,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Ice",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pattern",
+     "maxVal": 30,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    },
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pitch",
+     "maxVal": 24,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Reverse",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Phaser"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "PingPong Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Clean Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Modern Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Phaser"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Echo Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Analog Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Duck Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Release"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Dtype Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Grit"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Tremolo Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pattern",
+     "getValueText": 10,
+     "maxVal": 36
+    },
+    {
+     "name": "Tremolo\\nDepth"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Filter Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Filter"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Dual Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "T-Mode",
+     "getValueText": 18,
+     "maxVal": 32
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Lofi Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Grit"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Pattern Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pattern",
+     "maxVal": 30,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Speed"
+    },
+    {
+     "name": "Depth"
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Ice Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Pitch",
+     "maxVal": 24,
+     "minVal_expr": "<rzr>"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  },
+  {
+   "name": "Reverse Stereo",
+   "params": [
+    {
+     "name": "Time",
+     "maxVal": 4000,
+     "minVal": 200
+    },
+    {
+     "name": "Fb"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Phaser"
+    },
+    {
+     "name": "Mod"
+    },
+    {
+     "name": ""
+    },
+    {
+     "name": "Sync",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Sync\\nBpm",
+     "minVal": 80,
+     "maxVal": 480
+    }
+   ]
+  }
+ ],
+ "REV": [
+  {
+   "name": "Room",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Hall",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Plate",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Spring",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Combs"
+    }
+   ]
+  },
+  {
+   "name": "Shimmer",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Pitch"
+    },
+    {
+     "name": "Amount"
+    }
+   ]
+  },
+  {
+   "name": "Bloom",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Lend"
+    },
+    {
+     "name": "Length"
+    }
+   ]
+  },
+  {
+   "name": "Cloud",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Diff"
+    }
+   ]
+  },
+  {
+   "name": "Lofi",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sample\\nRate"
+    },
+    {
+     "name": "Noise\\nLevel"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Swell",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Lend"
+    },
+    {
+     "name": "Rise\\nTime"
+    }
+   ]
+  },
+  {
+   "name": "Room stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Hall stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Plate stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Spring stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Combs"
+    }
+   ]
+  },
+  {
+   "name": "Shimmer stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Pitch"
+    },
+    {
+     "name": "Amount"
+    }
+   ]
+  },
+  {
+   "name": "Bloom stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Lend"
+    },
+    {
+     "name": "Length"
+    }
+   ]
+  },
+  {
+   "name": "Cloud stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "High\\nPass"
+    },
+    {
+     "name": "Low\\nPass"
+    },
+    {
+     "name": "Diff"
+    }
+   ]
+  },
+  {
+   "name": "Lofi stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Sample\\nRate"
+    },
+    {
+     "name": "Noise\\nLevel"
+    },
+    {
+     "name": "Mod\\nDepth"
+    }
+   ]
+  },
+  {
+   "name": "Swell stereo",
+   "params": [
+    {
+     "name": "Decay"
+    },
+    {
+     "name": "Mix"
+    },
+    {
+     "name": "Tone"
+    },
+    {
+     "name": "Lend"
+    },
+    {
+     "name": "Rise\\nTime"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+
+# Descargas de terceros y análisis local (no redistribuibles)
+original/
+reference/video/
+tools/blutter/
+tools/pylibs/
+analysis/asm/
+analysis/ida_script/
+analysis/pp.txt
+analysis/objs.txt
+
+# Datos personales de la pedalera (bancos leídos, ajustes) y capturas pesadas
+mk300-linux/backups/
+windows/app_debug_log_*.txt
+windows/screens/
+
+# Syncthing
+.stfolder
+.stignore
+.syncthing.*
+*.sync-conflict-*
+
+# Material de la app original / datos personales (decisión del usuario antes de subir a GitHub)
+reference/
+mk300-linux/assets/brand/
+windows/dumps/
+
+# Herramientas de captura locales (rutas personales)
+tools/midi_spy.py
+tools/midi_spy_attach.py
+tools/midi_spy_drv.js
+tools/window_shots.ps1
+analysis/blutter_frida.js
