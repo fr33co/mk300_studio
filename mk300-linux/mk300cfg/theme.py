@@ -74,6 +74,9 @@ QPushButton#power:checked {{ background: {t['kAccentDim']}; border-color: {t['kA
 QPushButton#playdrum {{ background: {t['kAccentDim']}; border: 1px solid {t['kAccent']}; border-radius: 6px;
     color: {t['kAccent']}; font-weight: bold; }}
 QPushButton#playdrum:disabled {{ background: {t['kSurface']}; border-color: {t['kBorder']}; color: {t['kTextMuted']}; }}
+QPushButton#devcard {{ background: {t['kCard']}; border: 1px solid {t['kAccent']}; border-radius: 12px;
+    text-align: left; padding: 0 22px; font-weight: bold; font-size: 15px; }}
+QPushButton#devcard:hover {{ background: {t['kElevated']}; }}
 QPushButton#tool {{ background: {t['kSurface']}; border: none; border-radius: 6px; padding: 9px 14px; }}
 QPushButton#tool:hover {{ background: {t['kElevated']}; }}
 QMainWindow, QMenuBar, QMenu {{ background: {t['kSurface']}; }}

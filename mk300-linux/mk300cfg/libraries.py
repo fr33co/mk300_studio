@@ -310,3 +310,71 @@ class CommunityPage(QtWidgets.QWidget):
         m.setMaximumWidth(520)
         v.addWidget(m, 0, QtCore.Qt.AlignHCenter)
         v.addStretch(2)
+
+
+class ConnectPage(QtWidgets.QWidget):
+    """Pantalla inicial: busca la pedalera por USB y deja entrar a los presets con un clic."""
+    connectRequested = QtCore.pyqtSignal()
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        v = QtWidgets.QVBoxLayout(self)
+        v.addStretch(2)
+        self.title = QtWidgets.QLabel("Buscando dispositivos…")
+        self.title.setAlignment(QtCore.Qt.AlignCenter)
+        f = self.title.font()
+        f.setPointSizeF(20)
+        f.setBold(True)
+        self.title.setFont(f)
+        v.addWidget(self.title)
+        self.sub = muted("")
+        self.sub.setAlignment(QtCore.Qt.AlignCenter)
+        v.addWidget(self.sub)
+        self.card = QtWidgets.QPushButton()
+        self.card.setObjectName("devcard")
+        self.card.setCursor(QtCore.Qt.PointingHandCursor)
+        self.card.setFixedSize(520, 84)
+        self.card.clicked.connect(self.connectRequested)
+        v.addWidget(self.card, 0, QtCore.Qt.AlignHCenter)
+        self.notice = muted("")
+        self.notice.setAlignment(QtCore.Qt.AlignCenter)
+        v.addWidget(self.notice)
+        row = QtWidgets.QHBoxLayout()
+        row.addStretch(1)
+        self.refresh_btn = QtWidgets.QPushButton("↻  Buscar de nuevo")
+        self.refresh_btn.setObjectName("tool")
+        self.refresh_btn.clicked.connect(self.scan)
+        row.addWidget(self.refresh_btn)
+        row.addStretch(1)
+        v.addLayout(row)
+        v.addStretch(3)
+        self.timer = QtCore.QTimer(self)
+        self.timer.timeout.connect(self.scan)
+        self.scan()
+
+    def set_notice(self, text):
+        self.notice.setText(text)
+
+    def scan(self):
+        from . import device
+        try:
+            path = device.find_device()
+        except device.DeviceError:
+            path = None
+        if path:
+            self.title.setText("Dispositivo encontrado")
+            self.sub.setText("Pulsa el dispositivo para sincronizar y entrar a tus presets.")
+            self.card.setText(f"MK300\nUSB · {path}      ›")
+        else:
+            self.title.setText("Ningún dispositivo")
+            self.sub.setText("Conecta la MK300 por USB. Se detectará sola.")
+        self.card.setVisible(bool(path))
+
+    def showEvent(self, e):
+        super().showEvent(e)
+        self.scan()
+        self.timer.start(1500)
+
+    def hideEvent(self, e):
+        super().hideEvent(e)
+        self.timer.stop()

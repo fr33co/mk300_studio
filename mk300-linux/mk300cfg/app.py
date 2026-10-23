@@ -141,6 +141,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.live_sent = None  # copia del preset activo tal como está en la RAM de la pedalera
         self._from_pedal = False
         self._glob_loading = False
+        self.offline = False  # el usuario abrió un archivo a propósito: se ven los presets sin pedalera
         self.pedal_models = None  # nombres de DS/AMP/CAB leídos de la pedalera (mandan sobre models.json)
         self.glob_raw = None  # copia de los 86 bytes de globales tal como están en la pedalera
         self.sync_timer = QtCore.QTimer(self)
@@ -157,9 +158,6 @@ class MainWindow(QtWidgets.QMainWindow):
         saved = QtCore.QSettings("mk300cfg", "app").value("theme", themes.DEFAULT)
         self.apply_theme(saved if saved in self.themes else themes.DEFAULT)
         self.open_path(os.path.join(DATA_DIR, "factory_am3.bin"))
-        # Si la pedalera está conectada, se abre su banco en el preset que tenga activo.
-        if not os.environ.get("MK300_NO_PEDAL"):
-            QtCore.QTimer.singleShot(0, lambda: self.connect_pedal(silent=True))
 
     # --- construcción de la interfaz ---------------------------------------
     def build_ui(self):
@@ -177,9 +175,12 @@ class MainWindow(QtWidgets.QMainWindow):
         sl.setContentsMargins(2, 10, 2, 10)
         sl.setSpacing(6)
         self.side_group = QtWidgets.QButtonGroup(self)
+        b = W.SideButton("Connect", "⇄")  # pantalla de conexión: id 4 (el último de la pila)
+        b.setChecked(True)
+        self.side_group.addButton(b, 4)
+        sl.addWidget(b)
         for i, (text, glyph) in enumerate((("Param", "☰"), ("Sounds", "▤"), ("Import", "⤓"), ("Community", "▦"))):
             b = W.SideButton(text, glyph)
-            b.setChecked(i == 0)
             self.side_group.addButton(b, i)
             sl.addWidget(b)
         sl.addStretch(1)
@@ -226,8 +227,11 @@ class MainWindow(QtWidgets.QMainWindow):
             self.stack.addWidget(sa)
         self.tab_group.buttonClicked[int].connect(self.stack.setCurrentIndex)
 
-        for page in (param, libraries.SoundsPage(), libraries.ImportPage(), libraries.CommunityPage()):
+        self.connect_page = libraries.ConnectPage()
+        self.connect_page.connectRequested.connect(lambda: self.connect_pedal(silent=False))
+        for page in (param, libraries.SoundsPage(), libraries.ImportPage(), libraries.CommunityPage(), self.connect_page):
             self.top_stack.addWidget(page)
+        self.top_stack.setCurrentIndex(4)
         self.side_group.buttonClicked[int].connect(self.top_stack.setCurrentIndex)
 
     def build_effect_page(self):
@@ -354,8 +358,8 @@ class MainWindow(QtWidgets.QMainWindow):
     def build_menus(self):
         m = self.menuBar().addMenu("&Archivo")
         for text, slot, key in (
-            ("Banco de fábrica AM3", lambda: self.open_path(os.path.join(DATA_DIR, "factory_am3.bin")), None),
-            ("Banco de fábrica AM4", lambda: self.open_path(os.path.join(DATA_DIR, "factory_am4.bin")), None),
+            ("Banco de fábrica AM3", lambda: self.open_file(os.path.join(DATA_DIR, "factory_am3.bin")), None),
+            ("Banco de fábrica AM4", lambda: self.open_file(os.path.join(DATA_DIR, "factory_am4.bin")), None),
             ("&Abrir…", self.open_dialog, "Ctrl+O"),
             ("&Guardar", self.save, "Ctrl+S"),
             ("Guardar &como…", self.save_as, "Ctrl+Shift+S"),
@@ -505,7 +509,7 @@ class MainWindow(QtWidgets.QMainWindow):
     def open_dialog(self):
         p, _ = QtWidgets.QFileDialog.getOpenFileName(self, "Abrir banco", "", "Bancos (*.bin);;Todos (*)")
         if p:
-            self.open_path(p)
+            self.open_file(p)
 
     # --- sincronización con la pedalera (USB) -------------------------------------
     def toggle_sync(self, on):
@@ -575,6 +579,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.link_label.setText("○ Sin pedalera")
             self.link_label.setStyleSheet("color: #9a9a9a; background: transparent; padding: 0 8px;")
+        self._update_view()
 
     def _unlink(self, why=None):
         self.sync_timer.stop()
@@ -592,12 +597,35 @@ class MainWindow(QtWidgets.QMainWindow):
         self.sync_action.blockSignals(False)
         if why:
             self.statusBar().showMessage(why, 8000)
+            self.connect_page.set_notice("Se perdió la conexión con la pedalera." if "desconectada" in why else why)
 
     def _sync_call(self, fn):
         try:
             fn()
         except (device.DeviceError, OSError) as e:
             self._unlink(f"Pedalera desconectada: {e}")
+
+    def show_page(self, idx):
+        self.side_group.button(idx).setChecked(True)
+        self.top_stack.setCurrentIndex(idx)
+
+    def _update_view(self):
+        """Sin pedalera (y sin archivo abierto a propósito) solo se ve la pantalla de conexión."""
+        online = self.pedal is not None or self.offline
+        for i in (0, 1, 2):
+            self.side_group.button(i).setEnabled(online)
+        cur = self.top_stack.currentIndex()
+        if online and cur == 4:
+            self.show_page(0)
+        elif not online and cur != 3:
+            self.show_page(4)
+
+    def open_file(self, path):
+        """Abrir un banco de archivo a propósito: permite ver los presets sin pedalera."""
+        self.open_path(path)
+        if self.pedal is None and self.bank is not None:
+            self.offline = True
+        self._update_view()
 
     def connect_pedal(self, silent=False):
         """Lee el banco de la pedalera, lo abre en su preset activo y empieza a sincronizar."""
@@ -626,6 +654,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.dirty = False
         self.open_path(path)
         self.bank.patches[idx].raw[:] = live  # la RAM de la pedalera manda sobre la flash
+        self.offline = False
+        self.connect_page.set_notice("")
         self.pedal, self.pedal_idx, self.live_sent = pedal, idx, bytes(live)
         self.pedal_models = models
         self.glob_raw = bytes(graw)

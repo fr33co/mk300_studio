@@ -35,6 +35,14 @@ def find_device():
     raise DeviceError("No se ve la MK300 por USB (amidi -l).")
 
 
+def pedal_present():
+    try:
+        find_device()
+        return True
+    except DeviceError:
+        return False
+
+
 class Pedal:
     def __init__(self, path=None):
         try:
