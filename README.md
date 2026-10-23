@@ -9,21 +9,24 @@ y sincronizada en los dos sentidos.
 
 ## Qué hace
 
-- Lee el banco completo (160 presets) y abre la app en el preset que tenga activo la pedalera.
-- **Sincronización en vivo** (Archivo → Sincronizar con la pedalera): el preset activo y los ajustes se reflejan
+- **Pantalla de conexión**: al abrir busca la pedalera por USB y hay que pulsar el dispositivo para entrar a los presets.
+  Sin pedalera no se ven presets; si se desconecta, la app vuelve sola a esa pantalla.
+- Al conectar lee el banco completo (160 presets) y abre en el preset que tenga activo la pedalera.
+- **Sincronización en vivo**: el preset activo y los ajustes se reflejan
   en ambos sentidos; la barra de estado indica qué cambió y de dónde.
 - **Save / Save to** guardan el preset en la flash de la pedalera, con confirmación y verificación por relectura.
 - Pestañas Effect, Glob, EQ, Looper y Drum con la disposición de la app oficial, cadena de 11 efectos reordenable,
   perillas, 8 temas y color de la interfaz según el color del preset.
 - Los nombres de los modelos de ampli, pantalla y distorsión se leen de la propia pedalera al conectar, así que
   siempre coinciden con lo que ella muestra (sin pedalera se usa una lista de respaldo).
-- Funciona también sin pedalera: edita bancos `.bin` como archivos.
+- Sin pedalera solo se ven presets si abres un banco `.bin` a propósito (Archivo → Abrir): se edita como un archivo.
 
 ## Estado
 
 | Función | Estado |
 |---|---|
 | Lectura de banco, preset activo y globales | Probado con la pedalera |
+| Pantalla de conexión y vuelta a ella al desconectar | Probado con el dispositivo simulado; el desenchufe real con cable, sin probar |
 | Edición en vivo y guardado de presets | Probado (firmware v75, solo en presets vacíos) |
 | Ajustes globales (Glob, EQ, Looper, Drum) | Mapa verificado contra capturas de la app oficial; sincronización en vivo sin probar del todo |
 | Tail Delay/Reverb | Deducido del código, sin verificar en la pedalera |
@@ -56,10 +59,9 @@ cd mk300-linux
 python3 run.py
 ```
 
-Al abrir, si la pedalera está conectada se lee su banco y se guarda una copia en `~/.local/share/mk300-studio/backups/`.
+Al abrir aparece la pantalla de conexión; pulsa el dispositivo MK300 para sincronizar. Se lee su banco y se guarda una
+copia en `~/.local/share/mk300-studio/backups/`.
 Cierra otras aplicaciones que usen la pedalera (como un editor MIDI): el puerto es exclusivo.
-
-Para pruebas sin tocar la pedalera: `MK300_NO_PEDAL=1 python3 run.py`.
 
 ## Protocolo (resumen)
 
@@ -83,6 +85,7 @@ Detalle y mapa completo: `analysis/log_windows.md`, `windows/README.md` y `mk300
 
 ```
 mk300-linux/   la app (PyQt5)
+packaging/     script para construir el paquete .deb
 tools/         utilidades: decodificador de capturas SysEx, lector de línea de comandos, extractores de catálogo
 windows/       capturas MIDI y notas tomadas con la app oficial en Windows
 analysis/      notas de la ingeniería inversa

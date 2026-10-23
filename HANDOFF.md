@@ -5,8 +5,9 @@ Este archivo sirve para retomar el trabajo en otra sesión: qué hay, cómo se p
 
 ## Reglas acordadas con el usuario
 - **Pruebas de escritura solo en presets vacíos "USER PRESET n".** Nunca con `CLEAN NFDA` ni `DISTORSION NFDA`
-  (ni seleccionarlos con código: una vez una app de pruebas se conectó sola y los seleccionó; por eso existe
-  `MK300_NO_PEDAL=1`. Hoy la app ya no conecta sola: hay que pulsar la tarjeta del dispositivo).
+  (ni seleccionarlos con código: una vez una app de pruebas se conectó sola y los seleccionó. Hoy la app ya no
+  conecta sola: hay que pulsar la tarjeta del dispositivo; en pruebas con código, no llamar a `connect_pedal`
+  salvo con la pedalera en un preset vacío).
 - Antes de escribir en flash, respaldo del banco. La app guarda uno en `~/.local/share/mk300-studio/backups/` al conectar.
 - **Nada de referencias al fabricante, a su app ni a su socio de servicios** en lo que se sube a GitHub (nombres, logos, rutas,
   código o recursos). Los nombres de modelo (ampli/pantalla/distorsión) se leen de la propia pedalera.
@@ -17,7 +18,7 @@ Este archivo sirve para retomar el trabajo en otra sesión: qué hay, cómo se p
 ## Cómo ejecutar
 ```
 cd mk300-linux && python3 run.py                          # PyQt5, con la pedalera por USB
-MK300_NO_PEDAL=1 QT_QPA_PLATFORM=offscreen python3 ...    # pruebas/capturas sin tocar la pedalera
+QT_QPA_PLATFORM=offscreen python3 ...                     # pruebas/capturas (la app no conecta sola)
 ```
 La app arranca en la pantalla **Connect**: busca la MK300 (cada 1,5 s) y hay que pulsar la tarjeta para sincronizar.
 Sin pedalera solo se ven presets si se abre un archivo a propósito (Archivo → Abrir / bancos de fábrica).
