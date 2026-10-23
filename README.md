@@ -1,105 +1,105 @@
 # MK300 Studio
 
-**MK300 Studio** es un configurador de escritorio de la pedalera **MK300** (USB 3654:7756) para Linux. Hace lo que la app
-oficial del fabricante hace en Windows: editar presets, ajustes globales, EQ, Looper y Drum, con la pedalera conectada por USB
-y sincronizada en los dos sentidos.
+**MK300 Studio** is a desktop editor for the **MK300** pedalboard (USB 3654:7756) on Linux. It does what the
+manufacturer's official Windows app does: edit presets, global settings, EQ, Looper and Drum, with the pedalboard
+connected over USB and synchronized in both directions.
 
-> Proyecto no oficial y sin relación con el fabricante. Se hizo por ingeniería inversa del tráfico USB-MIDI y de la
-> app original. **Úsalo bajo tu responsabilidad**: escribe en la memoria de la pedalera.
+> Unofficial project, not affiliated with the manufacturer. It was built by reverse engineering the USB-MIDI traffic
+> and the original app. **Use it at your own risk**: it writes to the pedalboard's memory.
 
-## Qué hace
+## What it does
 
-- **Pantalla de conexión**: al abrir busca la pedalera por USB y hay que pulsar el dispositivo para entrar a los presets.
-  Sin pedalera no se ven presets; si se desconecta, la app vuelve sola a esa pantalla.
-- Al conectar lee el banco completo (160 presets) y abre en el preset que tenga activo la pedalera.
-- **Sincronización en vivo**: el preset activo y los ajustes se reflejan
-  en ambos sentidos; la barra de estado indica qué cambió y de dónde.
-- **Save / Save to** guardan el preset en la flash de la pedalera, con confirmación y verificación por relectura.
-- Pestañas Effect, Glob, EQ, Looper y Drum con la disposición de la app oficial, cadena de 11 efectos reordenable,
-  perillas, 8 temas y color de la interfaz según el color del preset.
-- Los nombres de los modelos de ampli, pantalla y distorsión se leen de la propia pedalera al conectar, así que
-  siempre coinciden con lo que ella muestra (sin pedalera se usa una lista de respaldo).
-- Sin pedalera solo se ven presets si abres un banco `.bin` a propósito (Archivo → Abrir): se edita como un archivo.
+- **Connection screen**: on launch it looks for the pedalboard over USB, and you click the device to enter the presets.
+  Without a pedalboard no presets are shown; if it is unplugged, the app returns to that screen on its own.
+- On connect it reads the whole bank (160 presets) and opens on the preset that is active on the pedalboard.
+- **Live sync**: the active preset and the settings are mirrored in both directions; the status bar shows what changed
+  and where it came from.
+- **Save / Save to** write the preset to the pedalboard's flash, with confirmation and read-back verification.
+- Effect, Glob, EQ, Looper and Drum tabs laid out like the official app, a reorderable 11-effect chain, knobs, 8 themes,
+  and an interface color that follows the preset's color.
+- The names of the amp, cab and distortion models are read from the pedalboard itself on connect, so they always match
+  what it displays (a fallback list is used when there is no pedalboard).
+- Without a pedalboard, presets are only shown if you deliberately open a `.bin` bank (File → Open): it is edited as a file.
 
-## Estado
+## Status
 
-| Función | Estado |
+| Feature | Status |
 |---|---|
-| Lectura de banco, preset activo y globales | Probado con la pedalera |
-| Pantalla de conexión y vuelta a ella al desconectar | Probado con el dispositivo simulado; el desenchufe real con cable, sin probar |
-| Edición en vivo y guardado de presets | Probado (firmware v75, solo en presets vacíos) |
-| Ajustes globales (Glob, EQ, Looper, Drum) | Mapa verificado contra capturas de la app oficial; sincronización en vivo sin probar del todo |
-| Tail Delay/Reverb | Deducido del código, sin verificar en la pedalera |
-| Import/Swap de banco completo, Factory Restore, Snapshots, IR/Sounds | No implementado (no escribe nada de esto) |
+| Reading the bank, active preset and globals | Tested with the pedalboard |
+| Connection screen and return to it on disconnect | Tested with the simulated device; a real cable unplug is untested |
+| Live editing and saving presets | Tested (firmware v75, empty presets only) |
+| Global settings (Glob, EQ, Looper, Drum) | Map verified against captures of the official app; live sync not fully tested |
+| Tail Delay/Reverb | Inferred from the code, not verified on the pedalboard |
+| Full bank Import/Swap, Factory Restore, Snapshots, IR/Sounds | Not implemented (none of this is written) |
 
-Solo se ha probado con el firmware **v75**.
+Only firmware **v75** has been tested.
 
-## Requisitos
+## Requirements
 
-- Linux con ALSA (`amidi`) y Python 3.10+
-- `PyQt5` (`pip install PyQt5` o el paquete `python3-pyqt5` de tu distribución)
-- La MK300 conectada por USB. Tu usuario debe poder abrir `/dev/snd/midiC*D*` (grupo `audio`); en Ubuntu suele
-  bastar con tener la sesión iniciada. Hay una regla udev opcional en `tools/99-mk300.rules`.
+- Linux with ALSA (`amidi`) and Python 3.10+
+- `PyQt5` (`pip install PyQt5` or your distribution's `python3-pyqt5` package)
+- The MK300 connected over USB. Your user must be able to open `/dev/snd/midiC*D*` (`audio` group); on Ubuntu being
+  logged in is usually enough. An optional udev rule is provided in `tools/99-mk300.rules`.
 
-## Instalación (paquete .deb)
+## Installation (.deb package)
 
 ```
-sh packaging/build_deb.sh            # genera dist/mk300-studio_0.1.0_all.deb
+sh packaging/build_deb.sh            # builds dist/mk300-studio_0.1.0_all.deb
 sudo apt install ./dist/mk300-studio_0.1.0_all.deb
-mk300-studio                         # o desde el menú de aplicaciones
+mk300-studio                         # or from the applications menu
 ```
 
-Instala la app en `/usr/lib/mk300-studio` y depende de `python3-pyqt5` y `alsa-utils`. Los respaldos se guardan en
-`~/.local/share/mk300-studio/backups/`. Para quitarla: `sudo apt remove mk300-studio`.
+It installs the app in `/usr/lib/mk300-studio` and depends on `python3-pyqt5` and `alsa-utils`. Backups are stored in
+`~/.local/share/mk300-studio/backups/`. To remove it: `sudo apt remove mk300-studio`.
 
-## Uso
+## Usage
 
 ```
 cd mk300-linux
 python3 run.py
 ```
 
-Al abrir aparece la pantalla de conexión; pulsa el dispositivo MK300 para sincronizar. Se lee su banco y se guarda una
-copia en `~/.local/share/mk300-studio/backups/`.
-Cierra otras aplicaciones que usen la pedalera (como un editor MIDI): el puerto es exclusivo.
+The connection screen appears on launch; click the MK300 device to sync. Its bank is read and a copy is saved to
+`~/.local/share/mk300-studio/backups/`.
+Close any other application that uses the pedalboard (such as a MIDI editor): the port is exclusive.
 
-## Protocolo (resumen)
+## Protocol (summary)
 
-USB-MIDI SysEx. Paquete `00 59 <cmd> <len16> 00 <payload> <chk>`, empaquetado a 7 bits dentro de `F0 … F7`,
-con `chk = ~sum(payload)`. Comandos: `0x11` identidad, `0x23` leer, `0x22` escribir (RAM).
+USB-MIDI SysEx. Packet `00 59 <cmd> <len16> 00 <payload> <chk>`, packed to 7 bits inside `F0 … F7`,
+with `chk = ~sum(payload)`. Commands: `0x11` identity, `0x23` read, `0x22` write (RAM).
 
-| Dirección | Contenido |
+| Address | Contents |
 |---|---|
-| `0x00000000` | Banco: 160 presets × 448 bytes + `PATCHEND` (flash) |
-| `0x10000000` | Preset activo (RAM, 448 bytes) |
-| `0x20000000` | Ajustes globales (86 bytes); bytes 0–1 = índice del preset activo |
-| `0xE0000000 + n` | Escribir 1 byte (0) selecciona el preset n |
-| `0xF0000000` | Escritura vacía tras escribir un preset: lo confirma en flash |
-| `0x70200000` | Nombres de preset |
-| `0x80000000` / `0x90000000` / `0xA0000000` | Nombres de modelo CAB / AMP / DS (registros de 14 bytes `<id><nombre>`) |
+| `0x00000000` | Bank: 160 presets × 448 bytes + `PATCHEND` (flash) |
+| `0x10000000` | Active preset (RAM, 448 bytes) |
+| `0x20000000` | Global settings (86 bytes); bytes 0–1 = active preset index |
+| `0xE0000000 + n` | Writing 1 byte (0) selects preset n |
+| `0xF0000000` | Empty write after writing a preset: commits it to flash |
+| `0x70200000` | Preset names |
+| `0x80000000` / `0x90000000` / `0xA0000000` | CAB / AMP / DS model names (14-byte records `<id><name>`) |
 
-Detalle y mapa completo: `analysis/log_windows.md`, `windows/README.md` y `mk300-linux/mk300cfg/`
+Details and the full map: `analysis/log_windows.md`, `windows/README.md` and `mk300-linux/mk300cfg/`
 (`protocol.py`, `device.py`, `bank.py`, `settings.py`).
 
-## Estructura
+## Layout
 
 ```
-mk300-linux/   la app (PyQt5)
-packaging/     script para construir el paquete .deb
-tools/         utilidades: decodificador de capturas SysEx, lector de línea de comandos, extractores de catálogo
-windows/       capturas MIDI y notas tomadas con la app oficial en Windows
-analysis/      notas de la ingeniería inversa
-HANDOFF.md     estado del proyecto y pendientes
+mk300-linux/   the app (PyQt5)
+packaging/     script that builds the .deb package
+tools/         utilities: SysEx capture decoder, command-line reader, catalog extractors
+windows/       MIDI captures and notes taken with the official app on Windows
+analysis/      reverse-engineering notes
+HANDOFF.md     project status and pending work
 ```
 
-## Seguridad
+## Safety
 
-- La app escribe solo en el preset activo (RAM), en posiciones de preset que tú confirmas y en los ajustes
-  globales. No borra sectores ni toca firmware.
-- Antes de guardar presets importantes, conserva un respaldo (`~/.local/share/mk300-studio/backups/` se genera solo al conectar).
-- Usa solo software que hayas obtenido de forma legítima.
+- The app writes only to the active preset (RAM), to preset slots you confirm, and to the global settings. It does not
+  erase sectors or touch the firmware.
+- Before saving important presets, keep a backup (`~/.local/share/mk300-studio/backups/` is created automatically on connect).
+- Use only software you have obtained legitimately.
 
-## Licencia
+## License
 
-[GPL-3.0 o posterior](LICENSE). Los iconos de `mk300-linux/assets/` son originales de este proyecto.
-"MK300" es el nombre del producto de su propietario y se cita solo para indicar con qué hardware es compatible.
+[GPL-3.0 or later](LICENSE). The icons in `mk300-linux/assets/` are original to this project.
+"MK300" is the name of its owner's product and is cited only to indicate which hardware this is compatible with.
