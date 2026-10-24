@@ -37,3 +37,4 @@ analysis/blutter_frida.js
 
 # Paquetes generados
 dist/
+tools/check_refs.sh
