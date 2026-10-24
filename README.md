@@ -7,6 +7,20 @@ connected over USB and synchronized in both directions.
 > Unofficial project, not affiliated with the manufacturer. It was built by reverse engineering the USB-MIDI traffic
 > and the original app. **Use it at your own risk**: it writes to the pedalboard's memory.
 
+## Screenshots
+
+| Connection screen | Effect |
+|---|---|
+| ![Connection screen](docs/screenshots/connect.png) | ![Effect tab](docs/screenshots/effect.png) |
+
+| Glob | EQ |
+|---|---|
+| ![Glob tab](docs/screenshots/glob.png) | ![EQ tab](docs/screenshots/eq.png) |
+
+| Looper | Drum |
+|---|---|
+| ![Looper tab](docs/screenshots/looper.png) | ![Drum tab](docs/screenshots/drum.png) |
+
 ## What it does
 
 - **Connection screen**: on launch it looks for the pedalboard over USB, and you click the device to enter the presets.
