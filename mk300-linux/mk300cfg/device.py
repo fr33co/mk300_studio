@@ -15,6 +15,7 @@ from . import protocol as sx
 from .bank import BANK_SIZE, PATCH_SIZE, PATCH_COUNT
 
 ADDR_GLOBAL, ADDR_LIVE, ADDR_SELECT, ADDR_COMMIT = 0x20000000, 0x10000000, 0xE0000000, 0xF0000000
+ADDR_NAMES, NAMES_SIZE = 0x70200000, PATCH_COUNT * 17  # nombres de preset: 160 registros de 17 bytes
 # Listas de nombres de modelo (type 5): registros de 14 bytes "<id><nombre>", id desde 1.
 MODEL_TABLES = {"CAB": (0x80000000, 100), "AMP": (0x90000000, 120), "DS": (0xA0000000, 40)}
 
@@ -103,6 +104,9 @@ class Pedal:
                     names[i + 1] = s[len(str(i + 1)):]
             out[cat] = names
         return out
+
+    def read_names(self):
+        return self.read(ADDR_NAMES, NAMES_SIZE)
 
     def read_globals(self):
         return self.read(ADDR_GLOBAL, 86)

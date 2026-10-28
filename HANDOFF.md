@@ -59,7 +59,11 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 1. ~~Probar globales en vivo en ambos sentidos~~: probado por el usuario con la pedalera (2026-10-28): los cambios
    llegan y se guardan.
 2. Verificar Tail Delay/Reverb (captura en la app oficial de Windows cambiándolos).
-3. Detectar cambios de banco hechos desde la pedalera (hoy solo sigue el preset activo y sus ajustes).
+3. ~~Detectar cambios de banco hechos desde la pedalera~~: hecho (cada ~2 s lee los nombres de preset y la flash del
+   activo; si cambian, relee el banco y actualiza la app sin pisar presets que el usuario editó en la app). Limitación: un
+   cambio de contenido sin cambio de nombre en un preset no activo no se ve hasta que se active o cambie algún nombre.
+   Probado solo con pedalera simulada: falta probarlo con la real (renombrar/guardar un preset desde la pedalera, en un
+   preset vacío).
 4. Banco completo hacia la pedalera (Import all, Swap preset, Factory Restore): probablemente borrado de sectores y
    escrituras type 5/6 grandes. El borrado de 3 MB en `0x20000000..` del log parece firmware/IR: **no tocarlo**.
 5. Modo AM3/AM4 (escritura en `0x70300000`): sin entender. Nombres de modelo en AM4 sin comprobar.
@@ -67,7 +71,9 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 7. Fidelidad: rangos estimados (Pan, BPM, Auto Gate, LC/HC del CAB, EQ); Bass EQ 7 y Whammy sin nombre; barra de título.
 8. Antes de hacer público el repo: decidir qué hacer con `factory_am3.bin`, `factory_am4.bin` y `catalog.json` (datos
    del fabricante), el autor del commit (nombre y correo reales) y sacar `.git` de Syncthing (`.stignore`).
-9. Opcional: reconexión automática sin pulsar la tarjeta; podar `~/.local/share/mk300-studio/backups/`.
+9. ~~Reconexión automática y poda de backups~~: hecho. Solo reconecta tras perder la conexión por sorpresa (nunca al
+   arrancar ni tras desactivar la sincronización a mano) y sin cambios sin guardar; conectar solo lee. Se conservan los
+   30 backups más recientes. Probado con pedalera simulada; falta el desenchufe real.
 
 ## Notas
 - La carpeta vive en Syncthing; `.git` también se sincroniza (riesgo de conflictos).

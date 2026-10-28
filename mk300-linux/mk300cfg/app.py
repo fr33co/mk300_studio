@@ -43,6 +43,9 @@ def color_icon(patch):
 TAB_NAMES = ["Effect", "Glob", "EQ", "Looper", "Drum"]
 
 
+MAX_BACKUPS = 30  # copias de la pedalera que se conservan (se crea una en cada conexión)
+
+
 def user_data_dir():
     """Carpeta de datos del usuario (escribible aunque la app esté instalada en /usr)."""
     base = os.environ.get("XDG_DATA_HOME") or os.path.join(os.path.expanduser("~"), ".local", "share")
@@ -157,8 +160,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.offline = False  # el usuario abrió un archivo a propósito: se ven los presets sin pedalera
         self.pedal_models = None  # nombres de DS/AMP/CAB leídos de la pedalera (mandan sobre models.json)
         self.glob_raw = None  # copia de los 86 bytes de globales tal como están en la pedalera
+        self.flash_bank = None  # último banco leído de la flash de la pedalera (para detectar cambios hechos en ella)
+        self.flash_names = None  # y su lista de nombres de preset
+        self._bank_tick = 0
+        self._auto_reconnect = False  # solo tras perder la conexión por sorpresa, nunca al arrancar
         self.sync_timer = QtCore.QTimer(self)
         self.sync_timer.timeout.connect(self.poll_pedal)
+        self.reconnect_timer = QtCore.QTimer(self)
+        self.reconnect_timer.timeout.connect(self._try_reconnect)
+        self.reconnect_timer.start(1500)
         self.push_timer = QtCore.QTimer(self)
         self.push_timer.setSingleShot(True)
         self.push_timer.timeout.connect(lambda: self._sync_call(self._push_all))
@@ -599,7 +609,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self._update_title()
         self._update_view()
 
-    def _unlink(self, why=None):
+    def _unlink(self, why=None, auto=False):
+        self._auto_reconnect = auto  # solo si la conexión se perdió sola
         self.sync_timer.stop()
         self.push_timer.stop()
         if self.pedal:
@@ -610,6 +621,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.pedal = None
         self.pedal_models = None
         self.fw = None
+        self.flash_bank = self.flash_names = None
         self._set_link_state()
         self.sync_action.blockSignals(True)
         self.sync_action.setChecked(False)
@@ -622,7 +634,7 @@ class MainWindow(QtWidgets.QMainWindow):
         try:
             fn()
         except (device.DeviceError, OSError) as e:
-            self._unlink(f"Pedalera desconectada: {e}")
+            self._unlink(f"Pedalera desconectada: {e}", auto=True)
 
     def show_page(self, idx):
         self.side_group.button(idx).setChecked(True)
@@ -656,6 +668,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 data, idx, live, graw = pedal.read_bank(), pedal.current_index(), pedal.read_live(), pedal.read_globals()
                 models = pedal.read_model_names()
                 fw = fw_label(pedal.identity())
+                names = pedal.read_names()
             except Exception:
                 pedal.close()
                 raise
@@ -671,6 +684,8 @@ class MainWindow(QtWidgets.QMainWindow):
         path = os.path.join(folder, time.strftime("mk300_%Y%m%d_%H%M%S.bin"))
         with open(path, "wb") as f:
             f.write(data)
+        for old in sorted(f for f in os.listdir(folder) if f.startswith("mk300_") and f.endswith(".bin"))[:-MAX_BACKUPS]:
+            os.remove(os.path.join(folder, old))
         self.dirty = False
         self.open_path(path)
         self.bank.patches[idx].raw[:] = live  # la RAM de la pedalera manda sobre la flash
@@ -679,6 +694,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.pedal, self.pedal_idx, self.live_sent = pedal, idx, bytes(live)
         self.pedal_models = models
         self.fw = fw
+        self.flash_bank, self.flash_names, self._bank_tick = bytes(data), names, 0
         self.glob_raw = bytes(graw)
         g = GlobalSettings.from_raw(graw)
         g.pedal_state = list(live[0x1E:0x20])
@@ -715,8 +731,44 @@ class MainWindow(QtWidgets.QMainWindow):
             self.set_glob(g)
             self.statusBar().showMessage(f"Pedalera → app: {names}", 5000)
 
+    def _try_reconnect(self):
+        """Tras perder la conexión por sorpresa, vuelve a conectar sola cuando reaparece (solo lee; sin cambios pendientes)."""
+        if self.pedal is None and self._auto_reconnect and not self.dirty and device.pedal_present():
+            self.connect_pedal(silent=True)
+
+    def _poll_bank(self):
+        """Detecta cambios de banco hechos desde la pedalera (guardar, renombrar, copiar) y los trae a la app."""
+        idx = self.pedal_idx
+        names = self.pedal.read_names()
+        flash = self.pedal.read(idx * PATCH_SIZE, PATCH_SIZE)
+        if names == self.flash_names and flash == self.flash_bank[idx * PATCH_SIZE:(idx + 1) * PATCH_SIZE]:
+            return
+        new, old = self.pedal.read_bank(), self.flash_bank
+        updated, kept = [], []
+        for i in range(PATCH_COUNT):
+            a, b = i * PATCH_SIZE, (i + 1) * PATCH_SIZE
+            if new[a:b] == old[a:b]:
+                continue
+            p = self.bank.patches[i]
+            if i == idx:  # el activo ya va por la RAM
+                updated.append(i)
+            elif bytes(p.raw) == old[a:b]:
+                p.raw[:] = new[a:b]
+                updated.append(i)
+            else:  # el usuario lo editó en la app: no se pisa
+                kept.append(i)
+        self.flash_bank, self.flash_names = bytes(new), names
+        self.refresh_presets()
+        msg = f"Pedalera → app: banco actualizado ({len(updated)} presets)"
+        if kept:
+            msg += f"; {len(kept)} con cambios tuyos sin tocar"
+        self.statusBar().showMessage(msg, 8000)
+
     def _poll_pedal(self):
         self._poll_globals()
+        self._bank_tick += 1
+        if self._bank_tick % 5 == 0 and self.flash_bank is not None and self.pedal_idx is not None:  # cada ~2 s
+            self._poll_bank()
         idx, live = self.pedal.current_index(), self.pedal.read_live()
         changed = False
         if idx != self.pedal_idx:  # cambio de preset hecho en la pedalera
@@ -793,6 +845,8 @@ class MainWindow(QtWidgets.QMainWindow):
             return
         def run():
             self.pedal.save_preset(idx, bytes(p.raw))
+            self.flash_bank = self.flash_bank[:idx * PATCH_SIZE] + bytes(p.raw) + self.flash_bank[(idx + 1) * PATCH_SIZE:]
+            self.flash_names = self.pedal.read_names()  # lo guardado desde la app no cuenta como cambio de la pedalera
             if idx != self.preset_combo.currentIndex():
                 self.bank.patches[idx].raw[:] = p.raw
                 self.refresh_presets()

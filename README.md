@@ -27,7 +27,8 @@ connected over USB and synchronized in both directions.
   Without a pedalboard no presets are shown; if it is unplugged, the app returns to that screen on its own.
 - On connect it reads the whole bank (160 presets) and opens on the preset that is active on the pedalboard.
 - **Live sync**: the active preset and the settings are mirrored in both directions; the status bar shows what changed
-  and where it came from.
+  and where it came from. Presets saved or renamed on the pedalboard itself are picked up too, and if the cable is
+  unplugged the app reconnects on its own when the pedalboard comes back.
 - **Save / Save to** write the preset to the pedalboard's flash, with confirmation and read-back verification.
 - Effect, Glob, EQ, Looper and Drum tabs laid out like the official app, a reorderable 11-effect chain, knobs, 8 themes,
   and an interface color that follows the preset's color.
