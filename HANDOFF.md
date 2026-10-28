@@ -74,7 +74,8 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
    Audio separation como biblioteca local sin separación de pistas, Community); sin pedalera solo están activas Connect,
    Audio separation y Community.
 7. Fidelidad: hecho (rangos de Pan, BPM, Auto Gate, EQ y CAB, Bass EQ 7, Whammy con Mix solo en MBody, título con
-   versión, arco invertido de High Cut en CAB). Falta: rango de Bend de Whammy en MBody/Oct2 (se asume 0–100), y que la
+   versión, arco invertido de High Cut en CAB). Bend de Whammy verificado con la pedalera (2026-10-28, lectura): 0–100 en MBody, Oct1 y Oct2; Mix queda fijo en 50 en
+   los tres modos y la pedalera guarda un Bend distinto por modo (al cambiar Mode lo cambia ella). Falta: la
    app oficial llama NAM al slot AMP en un preset vacío. Hipótesis sin verificar: el modelo AMP nº 1 de la pedalera es un
    modelo importado por el usuario (su registro `unboosted her…` no lleva el número delante, a diferencia de los demás) y
    la app etiqueta NAM cuando el slot usa un modelo importado. Para confirmarlo: ver en la app oficial qué modelo es el
