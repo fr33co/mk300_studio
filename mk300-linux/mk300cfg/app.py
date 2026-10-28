@@ -78,6 +78,13 @@ def param_format(cat, name):
     return None
 
 
+WHAMMY_MODES = ("MBody", "Oct1", "Oct2")
+
+
+def fmt_whammy_mode(v):
+    return WHAMMY_MODES[v] if 0 <= v < len(WHAMMY_MODES) else str(v)
+
+
 def fw_label(ident):
     """'MK300_075' -> 'v75' (sin la versión, cadena vacía)."""
     digits = ident.rpartition("_")[2]
@@ -164,6 +171,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.flash_names = None  # y su lista de nombres de preset
         self._bank_tick = 0
         self._auto_reconnect = False  # solo tras perder la conexión por sorpresa, nunca al arrancar
+        self._mix_knob = None  # perilla Mix de Whammy (se oculta fuera del modo MBody)
         self.sync_timer = QtCore.QTimer(self)
         self.sync_timer.timeout.connect(self.poll_pedal)
         self.reconnect_timer = QtCore.QTimer(self)
@@ -1054,9 +1062,16 @@ class MainWindow(QtWidgets.QMainWindow):
             self.set_dirty(True)
             self.refresh_knobs()
 
+    def _is_whammy(self, p):
+        cat = SLOT_NAMES[self.slot]
+        return cat == "FX" and cat in CATALOG_VALIDATED and p.unit(self.slot) < len(self.catalog[cat]) \
+            and self.catalog[cat][p.unit(self.slot)]["name"] == "Whammy"
+
     def set_param(self, i, v):
         if (p := self._cur()):
             p.set_param(self.slot, i, v)
+            if i == 0 and self._mix_knob is not None and self._is_whammy(p):
+                self._mix_knob.setVisible(v == 0)  # Mix solo existe con Mode = MBody
             self.set_dirty(True)
 
     # --- refresco de la interfaz -----------------------------------------------
@@ -1146,8 +1161,8 @@ class MainWindow(QtWidgets.QMainWindow):
         if cat in ("AMP", "DS"):
             return [(i, n, 0, 100, None) for i, n in enumerate(AMP_DS_PARAMS)], True
         if cat == "CAB":
-            return [(0, CAB_PARAMS[0], 0, 100, None), (1, CAB_PARAMS[1], 0, 500, None),
-                    (2, CAB_PARAMS[2], 0, 250, fmt_khz)], True
+            return [(0, CAB_PARAMS[0], 0, 100, None), (1, CAB_PARAMS[1], 20, 300, None),
+                    (2, CAB_PARAMS[2], 50, 180, fmt_khz)], True
         if cat == "VOL":
             return [(0, "VOL", 0, 100, None)], True
         if cat in CATALOG_VALIDATED:
@@ -1160,7 +1175,8 @@ class MainWindow(QtWidgets.QMainWindow):
                     name = names[i]
                     if not name or (name == "Sync\nBpm" and not sync_on):
                         continue  # parámetros sin nombre u ocultos, como en la app original
-                    out.append((i, name, prm.get("minVal", 0), prm.get("maxVal", 100), param_format(cat, name)))
+                    fmt = fmt_whammy_mode if child["name"] == "Whammy" and name == "Mode" else param_format(cat, name)
+                    out.append((i, name, prm.get("minVal", 0), prm.get("maxVal", 100), fmt))
                 return out, True
         n = max(3, 1 + max([i for i in range(PARAMS) if patch.param(slot, i) != 0], default=-1))
         out = []
@@ -1182,11 +1198,15 @@ class MainWindow(QtWidgets.QMainWindow):
         specs, known = self.knob_specs(self.slot, p.unit(self.slot), p)
         color = W.CATEGORY_COLORS[SLOT_NAMES[self.slot]]
         self.knob_row.addStretch(1)
+        self._mix_knob = None
         for i, label, lo, hi, fmt in specs:
             k = W.Knob(label, lo, hi, color, fmt)
             k.setValue(p.param(self.slot, i))
             k.valueChanged.connect(lambda v, i=i: self.set_param(i, v))
             self.knob_row.addWidget(k)
+            if self._is_whammy(p) and label == "Mix":
+                self._mix_knob = k
+                k.setVisible(p.param(self.slot, 0) == 0)  # solo con Mode = MBody, como la app original
         self.knob_row.addStretch(1)
         self.hint.setText("" if known else
                           "Nombres de parámetros de este tipo aún no verificados con la app original (P1…Pn).")
