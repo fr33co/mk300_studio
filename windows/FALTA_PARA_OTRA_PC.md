@@ -13,6 +13,10 @@ original con el contexto.
 - Anotar los resultados en `windows/RESULTADOS_PARTE3.md` (crearlo), un apartado por punto, con el valor leído tal como
   lo muestra la app.
 
+**No hacer, aunque haya un plan escrito:** `PLAN_CAPTURA_IMPORT.md` implica importar de verdad (borra y escribe flash).
+Está **en espera** hasta que el usuario decida cómo restaurar un modelo importado. En el punto 6 solo se observa: no
+cargar archivos en la pedalera ni pulsar "Save to Device".
+
 ## 1. BPM máximo del preset (módulo Effect)
 - Arrastrar el control BPM del preset al mínimo y al máximo; capturar cada extremo.
 - Se espera mín. 40 (confirmado) y máx. 240 (asumido). Anotar el valor real del máximo.
@@ -48,12 +52,14 @@ original con el contexto.
   `06_import_load_list.png`.
 
 ## 7. Tail Delay / Reverb (lo pide la sesión de Linux, ver `FALTA_DE_LINUX.md`)
-- En los ajustes de Tail, cambiar entre Off / Auto / Force y capturar cada estado; anotar el valor que muestra la app.
-- Archivos: `09_tail_off.png`, `09_tail_auto.png`, `09_tail_force.png`. Devolver el ajuste a su valor original.
+- En los ajustes de Tail, cambiar **Delay** y **Reverb** por separado entre Off / Auto / Force y capturar cada estado;
+  anotar el valor que muestra la app. Devolver cada ajuste a su valor original.
+- Archivos: `09_tail_delay_off.png`, `09_tail_delay_auto.png`, `09_tail_delay_force.png`,
+  `09_tail_reverb_off.png`, `09_tail_reverb_auto.png`, `09_tail_reverb_force.png`.
 
 ## 8. (Opcional) Comprobaciones del clon
-- Con la pedalera conectada, abrir el clon de Linux (o describir lo observado en la app oficial) y confirmar que el
-  título de la ventana muestra la versión, p. ej. `MK300 v75 — <banco>`. No se probó con hardware real.
+- El título con la versión (`MK300 v75 — <banco>`) y los globales en vivo ya los probó el usuario con la pedalera en
+  Linux: no repetir.
 - Revisar que Whammy muestra Mode, Bend y Mix, y que Bass EQ 7 muestra sus 7 bandas con nombre.
 
 ## Verificación rápida de lo ya deducido por análisis (si hay tiempo)
