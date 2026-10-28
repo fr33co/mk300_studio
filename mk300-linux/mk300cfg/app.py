@@ -170,6 +170,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.flash_bank = None  # último banco leído de la flash de la pedalera (para detectar cambios hechos en ella)
         self.flash_names = None  # y su lista de nombres de preset
         self._bank_tick = 0
+        self._stale_ticks = 0  # sondeos seguidos esperando a que la RAM del preset nuevo se ponga al día
         self._auto_reconnect = False  # solo tras perder la conexión por sorpresa, nunca al arrancar
         self._mix_knob = None  # perilla Mix de Whammy (se oculta fuera del modo MBody)
         self.sync_timer = QtCore.QTimer(self)
@@ -780,6 +781,13 @@ class MainWindow(QtWidgets.QMainWindow):
             self._poll_bank()
         idx, live = self.pedal.current_index(), self.pedal.read_live()
         changed = False
+        if idx != self.pedal_idx and self.flash_bank is not None and self._stale_ticks < 4:
+            # La pedalera cambia el índice antes que la RAM del preset: si lo leído aún no es el de ese preset, se espera
+            # al siguiente sondeo (si no, el contenido del preset anterior se copiaría encima del nuevo).
+            if bytes(live[:NAME_LEN]) != self.flash_bank[idx * PATCH_SIZE:idx * PATCH_SIZE + NAME_LEN]:
+                self._stale_ticks += 1
+                return
+        self._stale_ticks = 0
         if idx != self.pedal_idx:  # cambio de preset hecho en la pedalera
             self.pedal_idx = idx
             self._from_pedal = True

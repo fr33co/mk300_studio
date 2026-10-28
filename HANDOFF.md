@@ -64,8 +64,11 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 3. ~~Detectar cambios de banco hechos desde la pedalera~~: hecho (cada ~2 s lee los nombres de preset y la flash del
    activo; si cambian, relee el banco y actualiza la app sin pisar presets que el usuario editó en la app). Limitación: un
    cambio de contenido sin cambio de nombre en un preset no activo no se ve hasta que se active o cambie algún nombre.
-   Probado solo con pedalera simulada: falta probarlo con la real (renombrar/guardar un preset desde la pedalera, en un
-   preset vacío).
+   Probado con la pedalera real (2026-10-28): renombrar el preset 160 y guardarlo desde la pedalera llegó a la app en
+   ~1,4 s ("banco actualizado"). Pendiente: probar un guardado que cambie solo el contenido, sin cambiar el nombre.
+   La prueba descubrió una carrera antigua en el sondeo: al cambiar de preset la pedalera actualiza el índice antes que
+   la RAM, y la app copiaba el contenido del preset anterior sobre el nuevo (en memoria, no en la pedalera). Corregido:
+   tras un cambio de preset espera a que el nombre leído coincida con el de la flash (máx. 4 sondeos).
 4. Banco completo hacia la pedalera (Import all, Swap preset, Factory Restore): probablemente borrado de sectores y
    escrituras type 5/6 grandes. El borrado de 3 MB en `0x20000000..` del log parece firmware/IR: **no tocarlo**.
 5. Modo AM3/AM4 (escritura en `0x70300000`): sin entender. Nombres de modelo en AM4 sin comprobar.
