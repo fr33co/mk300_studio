@@ -42,7 +42,7 @@ Comandos: `0x11` identidad, `0x23` leer, `0x22` escribir (RAM). Implementación:
 
 Mapa de globales (RAM, sin comando de guardado, como hace la app oficial): `mk300cfg/settings.py` (`RAW_FIELDS`).
 Verificado contra capturas de pantalla de la app oficial (EQ, Looper, Glob coinciden con los valores reales).
-Tail Delay/Reverb = bits del byte `0x4b` (máscaras 1/4 y 2/8: OFF/Auto/Force): deducido del código, sin verificar.
+Tail Delay/Reverb = bits del byte `0x4b` (máscaras 1/4 y 2/8: OFF/Auto/Force): verificado leyendo la pedalera.
 Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcados: `windows/` (`dumps/` y `screens/` no se suben).
 
 ## Qué funciona (probado con la pedalera, firmware v75)
@@ -58,9 +58,9 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 ## Pendiente
 1. ~~Probar globales en vivo en ambos sentidos~~: probado por el usuario con la pedalera (2026-10-28): los cambios
    llegan y se guardan.
-2. Tail Delay/Reverb: la app oficial muestra Delay y Reverb con OFF/Auto/Force (`windows/RESULTADOS_PARTE3.md`), igual
-   que el clon, pero las capturas no prueban el mapeo de bits del byte `0x4b`. Verificarlo con la pedalera: cambiar Tail
-   en el clon (preset vacío) y comprobar el resultado en la pedalera o en la app oficial.
+2. ~~Tail Delay/Reverb~~: verificado con la pedalera (2026-10-28, solo lectura, en USER PRESET 160): al cambiarlos desde la
+   pedalera el byte `0x4b` vale Delay Auto `0x01`, Force `0x05`; Reverb Auto `0x02`, Force `0x0A`; OFF `0x00`. Coincide con
+   las máscaras de `settings.py` (Delay 1/4, Reverb 2/8).
 3. ~~Detectar cambios de banco hechos desde la pedalera~~: hecho (cada ~2 s lee los nombres de preset y la flash del
    activo; si cambian, relee el banco y actualiza la app sin pisar presets que el usuario editó en la app). Limitación: un
    cambio de contenido sin cambio de nombre en un preset no activo no se ve hasta que se active o cambie algún nombre.
