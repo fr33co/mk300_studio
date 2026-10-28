@@ -206,11 +206,11 @@ class MainWindow(QtWidgets.QMainWindow):
         sl.setContentsMargins(2, 10, 2, 10)
         sl.setSpacing(6)
         self.side_group = QtWidgets.QButtonGroup(self)
-        b = W.SideButton("Connect", "⇄")  # pantalla de conexión: id 4 (el último de la pila)
+        b = W.SideButton("Connect", "⇄")  # pantalla de conexión: id 5 (el último de la pila)
         b.setChecked(True)
-        self.side_group.addButton(b, 4)
+        self.side_group.addButton(b, 5)
         sl.addWidget(b)
-        for i, (text, glyph) in enumerate((("Param", "☰"), ("Sounds", "▤"), ("Import", "⤓"), ("Community", "▦"))):
+        for i, (text, glyph) in enumerate((("Param", "☰"), ("Import", "⤓"), ("AI Tone", "✦"), ("Audio separ…", "♫"), ("Community", "▦"))):
             b = W.SideButton(text, glyph)
             self.side_group.addButton(b, i)
             sl.addWidget(b)
@@ -260,9 +260,10 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.connect_page = libraries.ConnectPage()
         self.connect_page.connectRequested.connect(lambda: self.connect_pedal(silent=False))
-        for page in (param, libraries.SoundsPage(), libraries.ImportPage(), libraries.CommunityPage(), self.connect_page):
+        for page in (param, libraries.ImportPage(), libraries.AiTonePage(), libraries.AudioSeparationPage(),
+                     libraries.CommunityPage(), self.connect_page):
             self.top_stack.addWidget(page)
-        self.top_stack.setCurrentIndex(4)
+        self.top_stack.setCurrentIndex(5)
         self.side_group.buttonClicked[int].connect(self.top_stack.setCurrentIndex)
 
     def build_effect_page(self):
@@ -649,15 +650,15 @@ class MainWindow(QtWidgets.QMainWindow):
         self.top_stack.setCurrentIndex(idx)
 
     def _update_view(self):
-        """Sin pedalera (y sin archivo abierto a propósito) solo se ve la pantalla de conexión."""
+        """Sin pedalera (y sin archivo abierto a propósito) solo se ven la conexión, Audio separation y Community."""
         online = self.pedal is not None or self.offline
-        for i in (0, 1, 2):
+        for i in (0, 1, 2):  # Param, Import, AI Tone
             self.side_group.button(i).setEnabled(online)
         cur = self.top_stack.currentIndex()
-        if online and cur == 4:
+        if online and cur == 5:
             self.show_page(0)
-        elif not online and cur != 3:
-            self.show_page(4)
+        elif not online and cur not in (3, 4, 5):
+            self.show_page(5)
 
     def open_file(self, path):
         """Abrir un banco de archivo a propósito: permite ver los presets sin pedalera."""

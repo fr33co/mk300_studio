@@ -1,6 +1,6 @@
-"""Páginas Sounds, Import y Community del menú lateral (disposición de la app oficial).
+"""Páginas Import, AI Tone, Audio separation y Community del menú lateral (disposición de la app oficial).
 
-Sounds e Import mantienen una lista local de archivos (se recuerda entre sesiones). Las
+Import (DS, AMP, CAB y Preset) y Audio separation mantienen una lista local de archivos (se recuerda entre sesiones). Las
 acciones que necesitan la pedalera (Save to Device, Audition, Use) están desactivadas.
 """
 import os
@@ -85,9 +85,10 @@ class FileList(QtWidgets.QWidget):
     """Buscador + botón Edit + lista de archivos con un botón de acción desactivado por fila."""
     changed = QtCore.pyqtSignal()
 
-    def __init__(self, action_text, tag=None, parent=None):
+    def __init__(self, action_text, tag=None, action_tip=NEEDS_DEVICE, empty_text=None, parent=None):
         super().__init__(parent)
-        self.action_text, self.tag = action_text, tag
+        self.action_text, self.tag, self.action_tip = action_text, tag, action_tip
+        self.empty_text = empty_text or "Sin archivos. Usa el botón «Load … File to List» para añadir."
         self.paths, self.editing = [], False
         lay = QtWidgets.QVBoxLayout(self)
         lay.setContentsMargins(0, 0, 0, 0)
@@ -158,7 +159,7 @@ class FileList(QtWidgets.QWidget):
         for p in shown:
             self.rows.addWidget(self.make_row(p))
         if not shown:
-            self.rows.addWidget(muted("Sin archivos. Usa el botón «Load … File to List» para añadir."))
+            self.rows.addWidget(muted(self.empty_text))
         self.rows.addStretch(1)
 
     def make_row(self, path):
@@ -193,7 +194,7 @@ class FileList(QtWidgets.QWidget):
         act.setObjectName("tool")
         act.setEnabled(False)
         act.setSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
-        act.setToolTip(NEEDS_DEVICE)
+        act.setToolTip(self.action_tip)
         h.addWidget(act)
         return w
 
@@ -241,7 +242,8 @@ class SoundsPanel(QtWidgets.QWidget):
             self.files.add_paths(paths)
 
 
-class SoundsPage(QtWidgets.QWidget):
+class ImportPage(QtWidgets.QWidget):
+    """Import: sub-pestañas DS, AMP, CAB y Preset, como la app oficial."""
     def __init__(self, parent=None):
         super().__init__(parent)
         v = QtWidgets.QVBoxLayout(self)
@@ -253,20 +255,21 @@ class SoundsPage(QtWidgets.QWidget):
         bl.setContentsMargins(4, 4, 4, 4)
         self.group = QtWidgets.QButtonGroup(self)
         self.stack = QtWidgets.QStackedWidget()
-        for i, kind in enumerate(("DS", "AMP", "CAB")):
+        for i, kind in enumerate(("DS", "AMP", "CAB", "Preset")):
             b = QtWidgets.QPushButton(kind)
             b.setObjectName("tab")
             b.setCheckable(True)
             b.setChecked(i == 0)
             self.group.addButton(b, i)
             bl.addWidget(b, 1)
-            self.stack.addWidget(SoundsPanel(kind))
+            self.stack.addWidget(PresetPanel() if kind == "Preset" else SoundsPanel(kind))
         self.group.buttonClicked[int].connect(self.stack.setCurrentIndex)
         v.addWidget(bar)
         v.addWidget(self.stack, 1)
 
 
-class ImportPage(QtWidgets.QWidget):
+class PresetPanel(QtWidgets.QWidget):
+    """Pestaña Preset de Import (snapshots)."""
     def __init__(self, parent=None):
         super().__init__(parent)
         v = QtWidgets.QVBoxLayout(self)
@@ -288,6 +291,59 @@ class ImportPage(QtWidgets.QWidget):
 
     def load_files(self):
         paths, _ = QtWidgets.QFileDialog.getOpenFileNames(self, "Cargar snapshots", "", "Snapshots (*.kz300);;Todos (*)")
+        if paths:
+            self.files.add_paths(paths)
+
+
+class AiTonePage(QtWidgets.QWidget):
+    """En la app oficial esta sección aún no existe: solo muestra "Coming Soon"."""
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        v = QtWidgets.QVBoxLayout(self)
+        v.addStretch(1)
+        t = QtWidgets.QLabel("Coming Soon")
+        t.setAlignment(QtCore.Qt.AlignCenter)
+        f = t.font()
+        f.setPointSizeF(18)
+        f.setBold(True)
+        t.setFont(f)
+        v.addWidget(t)
+        v.addStretch(1)
+
+
+class AudioSeparationPage(QtWidgets.QWidget):
+    """Biblioteca local de audio. La separación de pistas todavía no está disponible."""
+    EXTS = "*.wav *.mp3 *.flac *.ogg *.mp4 *.mov"
+
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        v = QtWidgets.QVBoxLayout(self)
+        v.setContentsMargins(0, 0, 0, 0)
+        v.setSpacing(10)
+        top = QtWidgets.QHBoxLayout()
+        title = QtWidgets.QLabel("Audio Library")
+        f = title.font()
+        f.setPointSizeF(16)
+        f.setBold(True)
+        title.setFont(f)
+        top.addWidget(title)
+        top.addStretch(1)
+        add = QtWidgets.QPushButton("+  Import")
+        add.setObjectName("tool")
+        add.clicked.connect(self.load_files)
+        top.addWidget(add)
+        v.addLayout(top)
+        v.addWidget(muted("Importa un archivo de audio o vídeo (WAV / MP3 / FLAC / OGG / MP4 / MOV). La separación de "
+                          "pistas todavía no está disponible en esta versión: por ahora solo se guarda la lista."))
+        self.files = FileList("Separate", action_tip="Separación de pistas no disponible en esta versión",
+                              empty_text="La biblioteca está vacía. Pulsa «+ Import» para añadir un archivo de audio o vídeo.")
+        self.files.set_paths(store().value("audio/files", [], type=list))
+        self.files.changed.connect(lambda: store().setValue("audio/files", self.files.paths))
+        v.addWidget(self.files, 1)
+
+    def load_files(self):
+        paths, _ = QtWidgets.QFileDialog.getOpenFileNames(
+            self, "Importar audio", "", f"Audio y vídeo ({self.EXTS});;Todos (*)")
         if paths:
             self.files.add_paths(paths)
 

@@ -69,7 +69,10 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 4. Banco completo hacia la pedalera (Import all, Swap preset, Factory Restore): probablemente borrado de sectores y
    escrituras type 5/6 grandes. El borrado de 3 MB en `0x20000000..` del log parece firmware/IR: **no tocarlo**.
 5. Modo AM3/AM4 (escritura en `0x70300000`): sin entender. Nombres de modelo en AM4 sin comprobar.
-6. Snapshots (`0x70400000`, 36864 B, cabecera "SnapShot"), Sounds/Import (IR) y Community: sin implementar.
+6. Snapshots (`0x70400000`, 36864 B, cabecera "SnapShot"), Import real a la pedalera (DS/AMP/CAB/Preset) y Community: sin
+   implementar. La barra lateral ya sigue a la app oficial (Param, Import con DS/AMP/CAB/Preset, AI Tone "Coming Soon",
+   Audio separation como biblioteca local sin separación de pistas, Community); sin pedalera solo están activas Connect,
+   Audio separation y Community.
 7. Fidelidad: hecho (rangos de Pan, BPM, Auto Gate, EQ y CAB, Bass EQ 7, Whammy con Mix solo en MBody, título con
    versión, arco invertido de High Cut en CAB). Falta: rango de Bend de Whammy en MBody/Oct2 (se asume 0–100), y que la
    app oficial llama NAM al slot AMP en un preset vacío. Hipótesis sin verificar: el modelo AMP nº 1 de la pedalera es un
