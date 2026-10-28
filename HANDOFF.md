@@ -71,8 +71,11 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 5. Modo AM3/AM4 (escritura en `0x70300000`): sin entender. Nombres de modelo en AM4 sin comprobar.
 6. Snapshots (`0x70400000`, 36864 B, cabecera "SnapShot"), Sounds/Import (IR) y Community: sin implementar.
 7. Fidelidad: hecho (rangos de Pan, BPM, Auto Gate, EQ y CAB, Bass EQ 7, Whammy con Mix solo en MBody, título con
-   versión). Falta: arco invertido de High Cut en CAB, rango de Bend de Whammy en MBody/Oct2 (se asume 0–100), y en un
-   preset vacío la app oficial llama NAM al slot AMP (modelos NAM): sin tratar.
+   versión, arco invertido de High Cut en CAB). Falta: rango de Bend de Whammy en MBody/Oct2 (se asume 0–100), y que la
+   app oficial llama NAM al slot AMP en un preset vacío. Hipótesis sin verificar: el modelo AMP nº 1 de la pedalera es un
+   modelo importado por el usuario (su registro `unboosted her…` no lleva el número delante, a diferencia de los demás) y
+   la app etiqueta NAM cuando el slot usa un modelo importado. Para confirmarlo: ver en la app oficial qué modelo es el
+   nº 1 de la lista AMP y si la etiqueta cambia a AMP al elegir otro.
    En la app oficial AI Tone solo muestra "Coming Soon" (no hay nada que replicar); Audio separation es una biblioteca
    local de audio (Import de WAV/MP3/MP4...), sin internet ni cuenta hasta donde se vio.
 8. Antes de hacer público el repo: decidir qué hacer con `factory_am3.bin`, `factory_am4.bin` y `catalog.json` (datos

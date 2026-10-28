@@ -59,8 +59,9 @@ class Knob(QtWidgets.QWidget):
     """Perilla con arco de 270° (empieza abajo a la izquierda, sentido horario)."""
     valueChanged = QtCore.pyqtSignal(int)
 
-    def __init__(self, label, vmin=0, vmax=100, color="#10b981", fmt=None, log=False, parent=None):
+    def __init__(self, label, vmin=0, vmax=100, color="#10b981", fmt=None, log=False, invert=False, parent=None):
         super().__init__(parent)
+        self.invert = invert  # el arco se llena al revés (High Cut del CAB); el valor y el arrastre no cambian
         self.label, self.vmin, self.vmax, self.color = label, vmin, vmax, color
         self.log = log  # escala logarítmica (frecuencias)
         self.fmt = fmt or str
@@ -120,7 +121,7 @@ class Knob(QtWidgets.QWidget):
         pen = QtGui.QPen(col("kElevated"), 4, cap=QtCore.Qt.RoundCap)
         p.setPen(pen)
         p.drawArc(r, int(-135 * 16), int(-270 * 16))
-        frac = self._frac(self._v)
+        frac = 1 - self._frac(self._v) if self.invert else self._frac(self._v)
         p.setPen(QtGui.QPen(QtGui.QColor(self.color), 4, cap=QtCore.Qt.RoundCap))
         if frac > 0:
             p.drawArc(r, int(-135 * 16), int(-270 * frac * 16))

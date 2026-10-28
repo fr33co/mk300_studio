@@ -1200,7 +1200,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.knob_row.addStretch(1)
         self._mix_knob = None
         for i, label, lo, hi, fmt in specs:
-            k = W.Knob(label, lo, hi, color, fmt)
+            k = W.Knob(label, lo, hi, color, fmt, invert=SLOT_NAMES[self.slot] == "CAB" and i == 2)
             k.setValue(p.param(self.slot, i))
             k.valueChanged.connect(lambda v, i=i: self.set_param(i, v))
             self.knob_row.addWidget(k)
