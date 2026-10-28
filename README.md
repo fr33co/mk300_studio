@@ -42,7 +42,7 @@ connected over USB and synchronized in both directions.
 | Reading the bank, active preset and globals | Tested with the pedalboard |
 | Connection screen and return to it on disconnect | Tested with the simulated device; a real cable unplug is untested |
 | Live editing and saving presets | Tested (firmware v75, empty presets only) |
-| Global settings (Glob, EQ, Looper, Drum) | Map verified against captures of the official app; live sync not fully tested |
+| Global settings (Glob, EQ, Looper, Drum) | Map verified against captures of the official app; live sync tested both ways, changes persist on the pedalboard |
 | Tail Delay/Reverb | Inferred from the code, not verified on the pedalboard |
 | Full bank Import/Swap, Factory Restore, Snapshots, IR/Sounds | Not implemented (none of this is written) |
 

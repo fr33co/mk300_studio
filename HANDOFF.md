@@ -47,15 +47,17 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 
 ## Qué funciona (probado con la pedalera, firmware v75)
 - Lectura de banco, preset activo, globales y nombres de modelo (probado en modo AM3).
-- Sincronización en vivo en ambos sentidos (preset, perillas, interruptores) con mensajes en la barra de estado.
-  Los globales en vivo están implementados pero no probados con la pedalera.
+- Sincronización en vivo en ambos sentidos (preset, perillas, interruptores, globales) con mensajes en la barra de estado.
+- Rangos de la app oficial aplicados (Pan, BPM, Auto Gate, EQ) y título con la versión (`MK300 v75`): probados con la pedalera.
+  Los rangos salen del análisis del código de la app oficial (`windows/ANALISIS_RANGOS.md`); el BPM máximo del preset (240) es supuesto.
 - Save / Save to en flash con confirmación y verificación por relectura (probado en presets vacíos).
 - Pantalla de conexión y regreso a ella al desconectar (el desenchufe con cable real solo se simuló).
 - Interfaz: ventana maximizada y escalada, selector de presets con lista dentro de la ventana (en Wayland la nativa se
   cerraba al soltar el ratón), color de la interfaz según el color del preset, 8 temas, iconos propios, `app_icon.svg`.
 
 ## Pendiente
-1. Probar globales en vivo en ambos sentidos con la pedalera en un preset vacío, y ver si sobreviven a apagarla.
+1. ~~Probar globales en vivo en ambos sentidos~~: probado por el usuario con la pedalera (2026-10-28): los cambios
+   llegan y se guardan.
 2. Verificar Tail Delay/Reverb (captura en la app oficial de Windows cambiándolos).
 3. Detectar cambios de banco hechos desde la pedalera (hoy solo sigue el preset activo y sus ajustes).
 4. Banco completo hacia la pedalera (Import all, Swap preset, Factory Restore): probablemente borrado de sectores y
