@@ -412,7 +412,19 @@
   },
   {
    "name": "Whammy",
-   "params": []
+   "params": [
+    {
+     "name": "Mode",
+     "minVal": 0,
+     "maxVal": 2
+    },
+    {
+     "name": "Bend"
+    },
+    {
+     "name": "Mix"
+    }
+   ]
   }
  ],
  "GATE": [
@@ -593,25 +605,39 @@
    "name": "Bass EQ 7",
    "params": [
     {
-     "name": null
+     "name": "50Hz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "120Hz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "400Hz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "500Hz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "800Hz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "4.5kHz",
+     "minVal": -24,
+     "maxVal": 24
     },
     {
-     "name": null
+     "name": "10k",
+     "minVal": -24,
+     "maxVal": 24
     }
    ]
   },

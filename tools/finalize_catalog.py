@@ -4,8 +4,8 @@
 Fuente de cada corrección (vídeo de la app oficial, lista desplegable de cada categoría):
   - DLY: además de los tipos extraídos, los mono incluyen Filter (tras Tremolo) y
     Pattern (tras Lofi). Verificado con el parche de fábrica "D7N DSSOLO" (tipo 12).
-  - FX: el último tipo es Whammy (buildMk300WhammyChildType; sus parámetros no se extrajeron).
-  - EQ: nombres de bandas (cadenas de effect_params.dart y fotogramas del vídeo).
+  - FX: el último tipo es Whammy (buildMk300WhammyChildType): Mode (0-2: MBody, Oct1, Oct2), Bend y Mix.
+  - EQ: nombres de bandas (cadenas de effect_params.dart y fotogramas del vídeo), incluido Bass EQ 7.
 """
 import copy
 import json
@@ -25,11 +25,16 @@ if not any(c["name"] == "Filter" for c in dly):
 
     cat["DLY"] = dly[:7] + [mono("Filter")] + dly[7:9] + [mono("Pattern")] + dly[9:]
 
-if not any(c["name"] == "Whammy" for c in cat["FX"]):
-    cat["FX"].append({"name": "Whammy", "params": []})
+WHAMMY = [{"name": "Mode", "minVal": 0, "maxVal": 2}, {"name": "Bend"}, {"name": "Mix"}]
+whammy = next((c for c in cat["FX"] if c["name"] == "Whammy"), None)
+if whammy is None:
+    cat["FX"].append({"name": "Whammy", "params": WHAMMY})
+else:
+    whammy["params"] = WHAMMY
 
 EQ = {
     "Guitar EQ 6": ["100Hz", "200Hz", "400Hz", "800Hz", "1.6kHz", "3.2kHz"],
+    "Bass EQ 7": ["50Hz", "120Hz", "400Hz", "500Hz", "800Hz", "4.5kHz", "10k"],
     "Normal EQ 10": ["31.25Hz", "62.5Hz", "125Hz", "250Hz", "500Hz", "1kHz", "2kHz", "4kHz", "8kHz", "16kHz"],
 }
 for c in cat["EQ"]:

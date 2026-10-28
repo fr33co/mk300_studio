@@ -222,7 +222,11 @@ def eq_response_db(s, f):
     """Respuesta del ecualizador (dB) a la frecuencia f: pasa-altos LC, pasa-bajos HC y 4 picos."""
     if not s.eq_enable:
         return 0.0
-    tot = _biquad_db(*_pass(max(s.eq_lc, 20), True), f) + _biquad_db(*_pass(min(s.eq_hc, 20000), False), f)
+    tot = 0.0
+    if s.eq_lc >= 20:  # por debajo de 20 el pasa-altos está apagado
+        tot += _biquad_db(*_pass(s.eq_lc, True), f)
+    if s.eq_hc <= 20000:  # por encima de 20000 el pasa-bajos está apagado
+        tot += _biquad_db(*_pass(s.eq_hc, False), f)
     for i in range(4):
         tot += _biquad_db(*_peak(s.eq_peak_freq[i], s.eq_quality_factor[i] / 10, s.eq_peak_gain[i]), f)
     return tot
@@ -251,7 +255,7 @@ class EqGraph(QtWidgets.QWidget):
     def _from_xy(self, x, y):
         f = self.FMIN * math.exp(max(0.0, min(1.0, (x - 30) / (self.width() - 40))) * math.log(self.FMAX / self.FMIN))
         db = (1 - (y - 8) / (self.height() - 28)) * 2 * self.DB - self.DB
-        return int(round(f)), int(round(max(-15, min(15, db))))
+        return int(round(f)), int(round(max(-18, min(18, db))))
 
     def paintEvent(self, _):
         p = QtGui.QPainter(self)
@@ -342,8 +346,8 @@ class EqPage(Page):
         self.power.setObjectName("power")
         self.power.setCheckable(True)
         self.power.setFixedSize(60, 60)
-        self.lc = W.Knob("LC", 20, 1000, "#3b9eff", log=True)
-        self.hc = W.Knob("HC", 1000, 20000, "#3b9eff", fmt=lambda v: f"{v / 1000:.1f}K", log=True)
+        self.lc = W.Knob("LC", 19, 200, "#3b9eff", fmt=lambda v: "OFF" if v < 20 else str(v), log=True)
+        self.hc = W.Knob("HC", 4000, 20500, "#3b9eff", fmt=lambda v: "OFF" if v > 20000 else f"{v / 1000:.1f}K", log=True)
         for label, widget in (("EQ", self.power), (None, self.lc), (None, self.hc)):
             col = QtWidgets.QVBoxLayout()
             col.addWidget(widget, 0, QtCore.Qt.AlignHCenter)
@@ -373,7 +377,7 @@ class EqPage(Page):
             hdr.setAlignment(QtCore.Qt.AlignHCenter)
             hdr.setStyleSheet(f"color: {BAND_COLORS[i]}; background: transparent; font-weight: bold;")
             grid.addWidget(hdr, 0, i + 1)
-            specs = (("freq", 20, 20000, fmt_freq, True), ("q", 1, 100, fmt_q, False), ("gain", -15, 15, fmt_db, False))
+            specs = (("freq", 20, 20000, fmt_freq, True), ("q", 1, 160, fmt_q, False), ("gain", -18, 18, fmt_db, False))
             for r, (key, lo, hi, fmt, log) in enumerate(specs):
                 k = W.Knob("", lo, hi, BAND_COLORS[i], fmt=fmt, log=log)
                 k.setFixedSize(86, 78)
@@ -446,7 +450,7 @@ class LooperPage(Page):
         self.rec = W.ParamBar("Rec Vol", 0, 100)
         self.play = W.ParamBar("Play Vol", 0, 100)
         self.auto = Segmented(["OFF", "ONCE", "HOLD"])
-        self.gate = W.ParamBar("Auto Gate", 0, 60)
+        self.gate = W.ParamBar("Auto Gate", 0, 100)
         self.pos = Segmented(["HEAD", "TAIL"])
         self.dsync = Segmented(["OFF", "ON-1", "ON-2"])
         L.addWidget(self.rec)
@@ -489,7 +493,7 @@ class DrumPage(Page):
         L.addWidget(play)
         L.addWidget(SectionHeader("Drum Machine"))
         self.vol = W.ParamBar("VOL", 0, 100)
-        self.bpm = W.BpmBar("Drum BPM", 30, 300)
+        self.bpm = W.BpmBar("Drum BPM", 40, 240)
         self.taps = []
         L.addWidget(self.vol)
         brow = QtWidgets.QHBoxLayout()

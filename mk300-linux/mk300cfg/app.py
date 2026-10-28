@@ -75,6 +75,12 @@ def param_format(cat, name):
     return None
 
 
+def fw_label(ident):
+    """'MK300_075' -> 'v75' (sin la versión, cadena vacía)."""
+    digits = ident.rpartition("_")[2]
+    return f"v{int(digits)}" if digits.isdigit() else ""
+
+
 def fmt_pan(v):
     return "C" if v == 0 else (f"R{v}" if v > 0 else f"L{-v}")
 
@@ -143,6 +149,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self._scale_timer.setSingleShot(True)
         self._scale_timer.timeout.connect(self._apply_scale)
         self.pedal = None  # conexión USB abierta (sincronización activa)
+        self.fw = None  # versión de firmware de la pedalera conectada ("v75")
         self.pedal_idx = None  # último preset activo visto en la pedalera
         self.live_sent = None  # copia del preset activo tal como está en la RAM de la pedalera
         self._from_pedal = False
@@ -295,8 +302,8 @@ class MainWindow(QtWidgets.QMainWindow):
 
         # barras Preset Vol / Pan / BPM
         self.bar_vol = W.ParamBar("Preset Vol", 0, 100)
-        self.bar_pan = W.ParamBar("Pan", -50, 50, fmt=fmt_pan)
-        self.bar_bpm = W.BpmBar("BPM", 30, 300)
+        self.bar_pan = W.ParamBar("Pan", -100, 100, fmt=fmt_pan)
+        self.bar_bpm = W.BpmBar("BPM", 40, 240)
         for bar, attr in ((self.bar_vol, "vol"), (self.bar_pan, "pan"), (self.bar_bpm, "tempo")):
             bar.valueChanged.connect(lambda val, a=attr: self.set_header(a, val))
         v.addWidget(self.bar_vol)
@@ -459,10 +466,14 @@ class MainWindow(QtWidgets.QMainWindow):
         i = self.preset_combo.currentIndex()
         return None if self._loading or i < 0 or not self.bank else self.bank.patches[i]
 
+    def _update_title(self):
+        base = os.path.basename(self.path) if self.path else "banco de fábrica"
+        head = f"MK300 {self.fw}" if self.pedal and self.fw else "MK300 Studio"
+        self.setWindowTitle(f"{head} — {base}{' *' if self.dirty else ''}")
+
     def set_dirty(self, v):
         self.dirty = v
-        base = os.path.basename(self.path) if self.path else "banco de fábrica"
-        self.setWindowTitle(f"MK300 Studio — {base}{' *' if v else ''}")
+        self._update_title()
         if v and self.pedal and not self._loading:
             self.push_timer.start(40)
 
@@ -585,6 +596,7 @@ class MainWindow(QtWidgets.QMainWindow):
         else:
             self.link_label.setText("○ Sin pedalera")
             self.link_label.setStyleSheet("color: #9a9a9a; background: transparent; padding: 0 8px;")
+        self._update_title()
         self._update_view()
 
     def _unlink(self, why=None):
@@ -597,6 +609,7 @@ class MainWindow(QtWidgets.QMainWindow):
                 pass
         self.pedal = None
         self.pedal_models = None
+        self.fw = None
         self._set_link_state()
         self.sync_action.blockSignals(True)
         self.sync_action.setChecked(False)
@@ -642,6 +655,7 @@ class MainWindow(QtWidgets.QMainWindow):
             try:
                 data, idx, live, graw = pedal.read_bank(), pedal.current_index(), pedal.read_live(), pedal.read_globals()
                 models = pedal.read_model_names()
+                fw = fw_label(pedal.identity())
             except Exception:
                 pedal.close()
                 raise
@@ -664,6 +678,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.connect_page.set_notice("")
         self.pedal, self.pedal_idx, self.live_sent = pedal, idx, bytes(live)
         self.pedal_models = models
+        self.fw = fw
         self.glob_raw = bytes(graw)
         g = GlobalSettings.from_raw(graw)
         g.pedal_state = list(live[0x1E:0x20])
