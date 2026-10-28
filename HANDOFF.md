@@ -51,7 +51,7 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
 - Rangos de la app oficial aplicados (Pan, BPM, Auto Gate, EQ) y título con la versión (`MK300 v75`): probados con la pedalera.
   Los rangos salen del análisis del código de la app oficial (`windows/ANALISIS_RANGOS.md`); el BPM máximo del preset (240) es supuesto.
 - Save / Save to en flash con confirmación y verificación por relectura (probado en presets vacíos).
-- Pantalla de conexión y regreso a ella al desconectar (el desenchufe con cable real solo se simuló).
+- Pantalla de conexión y regreso a ella al desconectar; desenchufe y reconexión automática probados con cable real.
 - Interfaz: ventana maximizada y escalada, selector de presets con lista dentro de la ventana (en Wayland la nativa se
   cerraba al soltar el ratón), color de la interfaz según el color del preset, 8 temas, iconos propios, `app_icon.svg`.
 
@@ -86,7 +86,10 @@ Detalle del log de la app oficial: `analysis/log_windows.md`; capturas y volcado
    del fabricante), el autor del commit (nombre y correo reales) y sacar `.git` de Syncthing (`.stignore`).
 9. ~~Reconexión automática y poda de backups~~: hecho. Solo reconecta tras perder la conexión por sorpresa (nunca al
    arrancar ni tras desactivar la sincronización a mano) y sin cambios sin guardar; conectar solo lee. Se conservan los
-   30 backups más recientes. Probado con pedalera simulada; falta el desenchufe real.
+   30 backups más recientes. Probado con la pedalera real (2026-10-28): desconexión detectada a los 15 s y reconexión sola
+   a los 19 s del desenchufe, a la primera. Nota: en un primer intento, tras volver a enchufar el cable enseguida, la
+   pedalera no contestó a la consulta de identidad ni a un proceso nuevo (la app reintentaba cada 2 s) y se recuperó al
+   reiniciarla; cada reintento fallido bloquea la ventana ~2 s. Pendiente opcional: espaciar los reintentos tras varios fallos.
 
 ## Notas
 - La carpeta vive en Syncthing; `.git` también se sincroniza (riesgo de conflictos).

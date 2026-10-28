@@ -41,7 +41,7 @@ connected over USB and synchronized in both directions.
 | Feature | Status |
 |---|---|
 | Reading the bank, active preset and globals | Tested with the pedalboard |
-| Connection screen and return to it on disconnect | Tested with the simulated device; a real cable unplug is untested |
+| Connection screen, return to it on disconnect, automatic reconnect | Tested with a real cable unplug/replug |
 | Live editing and saving presets | Tested (firmware v75, empty presets only) |
 | Global settings (Glob, EQ, Looper, Drum) | Map verified against captures of the official app; live sync tested both ways, changes persist on the pedalboard |
 | Tail Delay/Reverb | Verified on the pedalboard (read-only, changes made from the pedalboard) |
